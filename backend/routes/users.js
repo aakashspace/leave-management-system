@@ -1,0 +1,11 @@
+const router = require('express').Router();
+const c = require('../controllers/userController');
+router.get('/', c.getAllUsers);
+router.get('/pending', c.getPendingUsers);
+router.post('/', c.createUser);
+router.get('/:id', c.getUserById);
+router.put('/:id', c.updateUser);
+router.delete('/:id', c.deleteUser);
+router.put('/:id/approve', c.approveUser);
+router.put('/:id/reject', c.rejectUser);
+module.exports = router;

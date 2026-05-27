@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LMS Docs — Future Scope</title>
+<style>
+:root { --primary: #4F46E5; --primary-dark: #3730A3; --primary-light: #EEF2FF; --accent: #06B6D4; --success: #10B981; --warning: #F59E0B; --danger: #EF4444; --text: #1F2937; --text-muted: #6B7280; --bg: #F9FAFB; --card: #FFFFFF; --border: #E5E7EB; --sidebar-w: 270px; --radius: 10px; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+#sidebar { width: var(--sidebar-w); background: #1E1B4B; color: #C7D2FE; position: fixed; top: 0; left: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; z-index: 100; }
+.sb-brand { padding: 24px 20px 16px; border-bottom: 1px solid rgba(255,255,255,.1); }
+.sb-brand h2 { color: #fff; font-size: 16px; font-weight: 700; }
+.sb-brand p { font-size: 11px; color: #A5B4FC; margin-top: 3px; }
+.sb-nav { padding: 12px 0; flex: 1; }
+.sb-section { padding: 6px 20px 2px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #6366F1; font-weight: 700; }
+.sb-nav a { display: flex; align-items: center; gap: 9px; padding: 8px 20px; font-size: 13px; color: #C7D2FE; text-decoration: none; border-left: 3px solid transparent; transition: all .15s; }
+.sb-nav a:hover { background: rgba(255,255,255,.06); color: #fff; border-left-color: #6366F1; }
+.sb-nav a.active { background: rgba(99,102,241,.2); color: #fff; border-left-color: var(--primary); }
+.sb-footer { padding: 14px 20px; font-size: 11px; color: #6366F1; border-top: 1px solid rgba(255,255,255,.08); }
+#main { margin-left: var(--sidebar-w); flex: 1; }
+.page-header { background: linear-gradient(135deg, #1E1B4B 0%, #312E81 50%, #4338CA 100%); color: #fff; padding: 40px 48px 32px; }
+.page-header .breadcrumb { font-size: 12px; color: #A5B4FC; margin-bottom: 12px; }
+.page-header .breadcrumb a { color: #A5B4FC; text-decoration: none; }
+.page-header .breadcrumb a:hover { color: #fff; }
+.page-header h1 { font-size: 28px; font-weight: 800; display: flex; align-items: center; gap: 12px; }
+.page-header p { font-size: 14px; color: #C7D2FE; margin-top: 8px; }
+.content { padding: 40px 48px; max-width: 1100px; }
+.section-divider { height: 3px; background: linear-gradient(90deg, var(--primary) 0%, transparent 60%); border-radius: 99px; margin-bottom: 28px; }
+h3 { font-size: 16px; font-weight: 700; color: var(--text); margin: 24px 0 10px; }
+h4 { font-size: 14px; font-weight: 700; color: var(--primary); margin: 18px 0 8px; }
+p { font-size: 14px; line-height: 1.75; color: var(--text); margin-bottom: 12px; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media(max-width:900px){ .grid-2{ grid-template-columns: 1fr; } }
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-track { background: transparent; }
+#sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 99px; }
+@media print { #sidebar { display: none; } #main { margin-left: 0; } }
+@media(max-width:768px){ #sidebar{ display:none; } #main{ margin-left:0; } .page-header,.content{ padding:24px 20px; } }
+</style>
+</head>
+<body>
+<nav id="sidebar">
+  <div class="sb-brand">
+    <h2>📋 LMS Documentation</h2>
+    <p>IGNOU BCA 6th Sem · BCSP-064</p>
+  </div>
+  <div class="sb-nav">
+    <div class="sb-section">Home</div>
+    <a href="index.html" class="">🏠 Home</a>
+    <div class="sb-section">Overview</div>
+    <a href="overview.html" class="">📌 Project Overview</a>
+    <a href="stack.html" class="">🛠 Technology Stack</a>
+    <a href="architecture.html" class="">🏗 Architecture</a>
+    <div class="sb-section">Design</div>
+    <a href="database.html" class="">🗄 Database Schema</a>
+    <a href="dfd.html" class="">📊 DFD (Level 0–3)</a>
+    <a href="api.html" class="">🔌 API Reference</a>
+    <div class="sb-section">Features</div>
+    <a href="modules.html" class="">📦 Modules</a>
+    <a href="userflow.html" class="">👤 User Flows</a>
+    <a href="testing.html" class="">🧪 Testing</a>
+    <div class="sb-section">Defence</div>
+    <a href="future.html" class="active">🔮 Future Scope</a>
+    <a href="defence.html" class="">❓ Defence Q&amp;A</a>
+    <a href="viva.html" class="">🎓 Viva Prep (45 Q&amp;A)</a>
+  </div>
+  <div class="sb-footer">Aakash Sah · Enroll: 239150627</div>
+</nav>
+
+<div id="main">
+  <div class="page-header">
+    <div class="breadcrumb"><a href="index.html">Home</a> › Future Scope</div>
+    <h1><span style="background:rgba(255,255,255,.2);border-radius:8px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">10</span> Future Scope</h1>
+    <p>8 planned enhancements to extend the system beyond its current scope.</p>
+  </div>
+
+  <div class="content">
+    <div class="section-divider"></div>
+
+    <div class="grid-2">
+      <div class="card" style="padding:16px 20px"><h4>📧 Email Notifications</h4><p style="font-size:13px;color:var(--text-muted)">Integrate Nodemailer to send automated emails on leave submission, approval, and rejection. Reminder emails for pending approvals.</p></div>
+      <div class="card" style="padding:16px 20px"><h4>🏗 Multi-Level Approval</h4><p style="font-size:13px;color:var(--text-muted)">Add a Manager role. Leave requests first go to the Department Manager, then to Admin. Implement approval chain with escalation.</p></div>
+      <div class="card" style="padding:16px 20px"><h4>📅 Calendar Sync</h4><p style="font-size:13px;color:var(--text-muted)">Integration with Google Calendar / Outlook API to automatically block approved leave days in the employee's external calendar.</p></div>
+      <div class="card" style="padding:16px 20px"><h4>📱 Mobile App</h4><p style="font-size:13px;color:var(--text-muted)">Build a React Native or Flutter mobile app using the same Express.js backend API — no backend changes needed.</p></div>
+      <div class="card" style="padding:16px 20px"><h4>🎉 Holiday Management</h4><p style="font-size:13px;color:var(--text-muted)">Admin defines public holidays. System auto-excludes them from working-day calculations (currently only excludes weekends).</p></div>
+      <div class="card" style="padding:16px 20px"><h4>🔐 JWT Authentication</h4><p style="font-size:13px;color:var(--text-muted)">Add bcrypt password hashing and JWT tokens for production-level security. Currently simplified for local academic use.</p></div>
+      <div class="card" style="padding:16px 20px"><h4>📊 Chart.js Analytics</h4><p style="font-size:13px;color:var(--text-muted)">Replace CSS bar charts with Chart.js interactive charts — line graphs for trends, pie charts for type distribution.</p></div>
+      <div class="card" style="padding:16px 20px"><h4>🔄 Leave Accrual</h4><p style="font-size:13px;color:var(--text-muted)">Monthly automatic leave balance accrual (e.g., +1.25 days/month) instead of annual flat allocation. Cron job on the backend.</p></div>
+    </div>
+  </div>
+</div>
+<script></script>
+</body>
+</html>

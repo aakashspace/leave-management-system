@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LMS Docs — Defence Q&A</title>
+<style>
+:root { --primary: #4F46E5; --primary-dark: #3730A3; --primary-light: #EEF2FF; --accent: #06B6D4; --success: #10B981; --warning: #F59E0B; --danger: #EF4444; --text: #1F2937; --text-muted: #6B7280; --bg: #F9FAFB; --card: #FFFFFF; --border: #E5E7EB; --sidebar-w: 270px; --radius: 10px; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+#sidebar { width: var(--sidebar-w); background: #1E1B4B; color: #C7D2FE; position: fixed; top: 0; left: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; z-index: 100; }
+.sb-brand { padding: 24px 20px 16px; border-bottom: 1px solid rgba(255,255,255,.1); }
+.sb-brand h2 { color: #fff; font-size: 16px; font-weight: 700; }
+.sb-brand p { font-size: 11px; color: #A5B4FC; margin-top: 3px; }
+.sb-nav { padding: 12px 0; flex: 1; }
+.sb-section { padding: 6px 20px 2px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #6366F1; font-weight: 700; }
+.sb-nav a { display: flex; align-items: center; gap: 9px; padding: 8px 20px; font-size: 13px; color: #C7D2FE; text-decoration: none; border-left: 3px solid transparent; transition: all .15s; }
+.sb-nav a:hover { background: rgba(255,255,255,.06); color: #fff; border-left-color: #6366F1; }
+.sb-nav a.active { background: rgba(99,102,241,.2); color: #fff; border-left-color: var(--primary); }
+.sb-footer { padding: 14px 20px; font-size: 11px; color: #6366F1; border-top: 1px solid rgba(255,255,255,.08); }
+#main { margin-left: var(--sidebar-w); flex: 1; }
+.page-header { background: linear-gradient(135deg, #1E1B4B 0%, #312E81 50%, #4338CA 100%); color: #fff; padding: 40px 48px 32px; }
+.page-header .breadcrumb { font-size: 12px; color: #A5B4FC; margin-bottom: 12px; }
+.page-header .breadcrumb a { color: #A5B4FC; text-decoration: none; }
+.page-header .breadcrumb a:hover { color: #fff; }
+.page-header h1 { font-size: 28px; font-weight: 800; display: flex; align-items: center; gap: 12px; }
+.page-header p { font-size: 14px; color: #C7D2FE; margin-top: 8px; }
+.content { padding: 40px 48px; max-width: 1100px; }
+.section-divider { height: 3px; background: linear-gradient(90deg, var(--primary) 0%, transparent 60%); border-radius: 99px; margin-bottom: 28px; }
+h3 { font-size: 16px; font-weight: 700; color: var(--text); margin: 24px 0 10px; }
+p { font-size: 14px; line-height: 1.75; color: var(--text); margin-bottom: 12px; }
+code { background: #EEF2FF; color: #4338CA; padding: 2px 7px; border-radius: 5px; font-family: 'Cascadia Code','Fira Code', monospace; font-size: 12px; }
+.qa-item { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 14px; overflow: hidden; }
+.qa-q { padding: 14px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; background: #FAFAFA; font-size: 14px; font-weight: 600; color: var(--text); user-select: none; }
+.qa-q:hover { background: var(--primary-light); }
+.qa-q .arrow { font-size: 18px; color: var(--primary); flex-shrink: 0; transition: transform .2s; }
+.qa-a { padding: 14px 18px; font-size: 13.5px; line-height: 1.75; color: var(--text); background: var(--card); border-top: 1px solid var(--border); display: none; }
+.qa-item.open .qa-a { display: block; }
+.qa-item.open .arrow { transform: rotate(90deg); }
+.qa-category { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin: 28px 0 10px; }
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-track { background: transparent; }
+#sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 99px; }
+@media print { #sidebar { display: none; } #main { margin-left: 0; } }
+@media(max-width:768px){ #sidebar{ display:none; } #main{ margin-left:0; } .page-header,.content{ padding:24px 20px; } }
+</style>
+</head>
+<body>
+<nav id="sidebar">
+  <div class="sb-brand">
+    <h2>📋 LMS Documentation</h2>
+    <p>IGNOU BCA 6th Sem · BCSP-064</p>
+  </div>
+  <div class="sb-nav">
+    <div class="sb-section">Home</div>
+    <a href="index.html" class="">🏠 Home</a>
+    <div class="sb-section">Overview</div>
+    <a href="overview.html" class="">📌 Project Overview</a>
+    <a href="stack.html" class="">🛠 Technology Stack</a>
+    <a href="architecture.html" class="">🏗 Architecture</a>
+    <div class="sb-section">Design</div>
+    <a href="database.html" class="">🗄 Database Schema</a>
+    <a href="dfd.html" class="">📊 DFD (Level 0–3)</a>
+    <a href="api.html" class="">🔌 API Reference</a>
+    <div class="sb-section">Features</div>
+    <a href="modules.html" class="">📦 Modules</a>
+    <a href="userflow.html" class="">👤 User Flows</a>
+    <a href="testing.html" class="">🧪 Testing</a>
+    <div class="sb-section">Defence</div>
+    <a href="future.html" class="">🔮 Future Scope</a>
+    <a href="defence.html" class="active">❓ Defence Q&amp;A</a>
+    <a href="viva.html" class="">🎓 Viva Prep (45 Q&amp;A)</a>
+  </div>
+  <div class="sb-footer">Aakash Sah · Enroll: 239150627</div>
+</nav>
+
+<div id="main">
+  <div class="page-header">
+    <div class="breadcrumb"><a href="index.html">Home</a> › Defence Q&amp;A</div>
+    <h1><span style="background:rgba(255,255,255,.2);border-radius:8px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">11</span> Project Defence Q&amp;A</h1>
+    <p>Viva questions with detailed answers across 4 categories.</p>
+  </div>
+
+  <div class="content">
+    <div class="section-divider"></div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px">Click any question to reveal the answer. Prepare these thoroughly for your viva.</p>
+
+    <div class="qa-category">🎯 About the Project</div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">What is the Leave Management System and what problem does it solve?<span class="arrow">›</span></div>
+      <div class="qa-a">The LMS is a full-stack web application that automates employee leave management. It solves the problem of manual, paper-based leave tracking which is error-prone, slow, and lacks real-time visibility. The system provides a centralised digital platform where employees can apply for leave, view their balances, and track their history — while admins can manage policies, approve/reject requests, and generate reports.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">Why did you choose the M-E-V-N stack?<span class="arrow">›</span></div>
+      <div class="qa-a">I chose M-E-V-N because: (1) JavaScript is used across the entire stack — frontend, backend, and scripting — reducing the need to switch between languages. (2) MongoDB stores data as JSON-like documents, which flows naturally to and from the Vue.js frontend. (3) All technologies are open-source and free, ideal for an academic project. (4) This stack is industry-relevant — M-E-V-N/M-E-R-N are among the most popular full-stack frameworks in production today. (5) Node.js's non-blocking I/O is highly efficient for handling API requests.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">How many roles does the system have? What can each role do?<span class="arrow">›</span></div>
+      <div class="qa-a">The system has two roles: <strong>Employee</strong> and <strong>Admin</strong>. Employees can register (pending approval), apply for leave, view their balance cards with progress bars, see their leave history, cancel pending leaves, view an interactive calendar, and edit their profile (name, department). Admins can approve/reject user registrations, manage leave types (CRUD), manage departments, approve/reject leave requests with comments, and view reports broken down by type, department, and employee.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">What is the user registration and approval workflow?<span class="arrow">›</span></div>
+      <div class="qa-a">A new employee clicks the "Register" tab on the home screen, enters their name, email, and selects a department, and clicks Register. The system creates a user document in MongoDB with status='pending'. The user sees a message saying their account is pending admin approval. The admin logs in, goes to Manage Users or the Dashboard, sees the pending user, and clicks Approve. On approval, the backend fetches all active leave types and automatically creates a leave_balances array inside the user document with full balance for each type. The user can now select their account from the login dropdown.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">How is leave balance tracked? How is it deducted?<span class="arrow">›</span></div>
+      <div class="qa-a">Leave balances are stored as an embedded array inside each user document in MongoDB. Each entry has: leave_type_id, leave_type_name, total_days, used_days, and remaining_days. When an admin approves a paid leave request, the backend uses MongoDB's $inc operator to atomically increment used_days and decrement remaining_days by the total_days of that request. The $inc is atomic, meaning it happens in a single database operation — preventing race conditions where two simultaneous approvals could both read the same balance and double-deduct. Unpaid leaves skip this step entirely.</div>
+    </div>
+
+    <div class="qa-category">🛠 Technical Questions</div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">What is MongoDB and why is it used instead of a relational database like MySQL?<span class="arrow">›</span></div>
+      <div class="qa-a">MongoDB is a NoSQL document database that stores data as BSON (Binary JSON) documents instead of rows and columns. I chose MongoDB because: (1) The leave_balances data fits naturally as an embedded array inside the user document — in MySQL, this would require a separate table with joins. (2) MongoDB's flexible schema is ideal for this project where leave types may vary. (3) Mongoose ODM makes it easy to define schemas and validation in JavaScript. (4) The JSON format flows naturally through the entire M-E-V-N stack. A relational database would work too, but MongoDB's document model maps cleanly to the data structure of this system.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">What is RESTful API? How is it used in this project?<span class="arrow">›</span></div>
+      <div class="qa-a">REST (Representational State Transfer) is an architectural style for APIs where operations are performed using standard HTTP methods: GET (read), POST (create), PUT (update), DELETE (delete). In this project, the Express.js backend exposes RESTful endpoints like POST /api/leave-requests (submit leave), GET /api/users (list users), PUT /api/users/:id/approve (approve user). The Vue.js frontend calls these endpoints using Axios. Each response is a JSON object with { success, data, message } structure. The API is stateless — each request contains all the information needed to process it.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">What is Mongoose? Why use it over the native MongoDB driver?<span class="arrow">›</span></div>
+      <div class="qa-a">Mongoose is an ODM (Object Document Mapper) for MongoDB and Node.js. It lets you define Schemas (like a blueprint for your documents) and provides data validation, middleware hooks, and a clean query API. For example, the User schema defines that email must be unique, role must be 'employee' or 'admin', and status must be one of three values. Without Mongoose, we'd use the native MongoDB driver which has no built-in schema validation — any data could be inserted, leading to inconsistency. Mongoose also provides populate() for referencing other documents, similar to SQL JOINs.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">What is Pinia? Why is state management needed?<span class="arrow">›</span></div>
+      <div class="qa-a">Pinia is the official state management library for Vue 3. In this project, when a user selects their account on the home screen, that user's data (name, role, _id, leave_balances) needs to be accessible across all pages — Dashboard, Apply Leave, Profile, etc. Without a state store, we'd have to pass this data as props through every component or fetch it from the API on every page. Pinia provides a centralised store that any component can read from. The current user is also persisted to localStorage, so if the user refreshes the page, they don't lose their session.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">How does Vue Router work in this project?<span class="arrow">›</span></div>
+      <div class="qa-a">Vue Router is the client-side routing library for Vue.js that enables a Single Page Application (SPA). In this project, routes are defined for /, /employee/dashboard, /employee/apply, /employee/history, /employee/calendar, /employee/profile, and six admin routes. Vue Router intercepts navigation events and renders the correct component without a full page reload. Components are lazy-loaded using dynamic import() — meaning the code for each view is only downloaded when that route is visited, improving initial load time. The router is configured with createWebHistory() for clean URLs without the # character.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">How is the leave priority assigned?<span class="arrow">›</span></div>
+      <div class="qa-a">Priority is automatically assigned on the backend (in leaveRequestController.js) based on the name of the selected leave type. The getPriority() function checks: if the leave type name includes 'sick', 'medical', or 'emergency' → priority is 'high'. If it includes 'casual' → priority is 'medium'. All others → priority is 'low'. This happens server-side so employees cannot manipulate their priority. In the Admin dashboard, all pending leave requests are sorted with high-priority requests displayed first, ensuring urgent leaves (like Sick or Emergency) are reviewed before routine Annual Leave requests.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">How are working days calculated?<span class="arrow">›</span></div>
+      <div class="qa-a">The countWeekdays() function in leaveRequestController.js iterates through each calendar day from start_date to end_date inclusive. For each day, it checks if the day of the week is 0 (Sunday) or 6 (Saturday) using JavaScript's getDay() method. If it's a weekday (Monday to Friday), it increments the counter. This means a leave from Monday to Friday = 5 days, but a leave from Friday to Monday = 2 days (Friday + Monday only). If the entire range falls on a weekend, the system returns an error "No working days in selected range". This calculation happens both on the frontend (for live preview) and on the backend (for validation).</div>
+    </div>
+
+    <div class="qa-category">📐 Design Questions</div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">Explain the three-tier architecture of this project.<span class="arrow">›</span></div>
+      <div class="qa-a">The project follows a standard three-tier architecture: Tier 1 (Presentation/Frontend) is the Vue.js application running on port 5173. It handles the user interface, form inputs, and displays data. It never talks to the database directly. Tier 2 (Application/Backend) is the Node.js + Express.js server running on port 5000. It contains all business logic — validation, balance checking, priority assignment, and aggregation queries. Tier 3 (Data) is MongoDB running on port 27017 as a Windows service. It stores all data across 4 collections. The frontend talks only to the backend via HTTP (Axios). The backend talks only to the database (Mongoose). This separation ensures security, maintainability, and scalability.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">What is a DFD? Explain the levels in your project.<span class="arrow">›</span></div>
+      <div class="qa-a">A Data Flow Diagram (DFD) is a graphical representation showing how data flows through a system. It uses four symbols: rectangles for external entities (Employee, Admin), ellipses/circles for processes, open rectangles for data stores (D1-Users, D2-Departments, etc.), and arrows for data flows. Level 0 (Context Diagram) shows the entire system as one process with two entities — Employee and Admin. Level 1 breaks it into 4 main processes: User Management, Leave Application, Admin Review, and Reporting. Level 2 breaks each Level 1 process into sub-processes — e.g., Leave Application becomes: Select Type, Validate Dates, Check Balance, Assign Priority, Create Request, Cancel. Level 3 shows the internal logic of the most critical processes — e.g., the atomic balance deduction with MongoDB $inc, and the multi-stage aggregation pipeline for department reports.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">Why are leave_balances embedded inside the user document instead of a separate collection?<span class="arrow">›</span></div>
+      <div class="qa-a">This is a deliberate MongoDB design decision called denormalisation. The leave_balances are embedded inside the user document because: (1) They are always read together with the user — the Employee Dashboard shows all balances at once, so embedding avoids a separate query. (2) The atomic $inc update on approval only needs to target one document — if balances were in a separate collection, we'd need a transaction to update both collections safely. (3) The number of leave types is small and bounded (5 types), so the embedded array doesn't grow unboundedly. This contrasts with a relational database approach where a separate leave_balances table with user_id and leave_type_id as foreign keys would be used.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">What is a SPA (Single Page Application)? How does Vue.js implement it?<span class="arrow">›</span></div>
+      <div class="qa-a">A Single Page Application is a web app that loads one HTML page and dynamically updates the content using JavaScript without full page reloads. Traditional websites navigate to a new URL and the server sends a completely new HTML page each time. In Vue.js SPA: (1) The browser loads index.html once. (2) Vue Router intercepts link clicks and history changes. (3) The correct Vue component for that route is rendered inside &lt;router-view&gt;. (4) Only the data (JSON from the API) is fetched, not a new HTML page. This results in faster navigation, smoother user experience, and better performance. The trade-off is that initial load might be slightly slower and SEO can be more complex (not relevant for this project).</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">How does the department stats report work technically?<span class="arrow">›</span></div>
+      <div class="qa-a">The department stats use a MongoDB Aggregation Pipeline — a multi-stage query that processes documents in stages. Stage 1: Start with the leave_requests collection. Stage 2: $lookup joins with the users collection on user_id = _id — attaches each user's data to their requests. Stage 3: $unwind flattens the users array so each document has one user. Stage 4: $lookup joins with the departments collection on user.dept_id = _id — attaches the department name. Stage 5: $unwind with preserveNullAndEmptyArrays=true keeps requests from users with no department. Stage 6: $group by department name, summing totalRequests, totalDays, and counting approved/pending/rejected. Stage 7: $sort by totalRequests descending. The result is used to render a CSS horizontal bar chart on the Reports page.</div>
+    </div>
+
+    <div class="qa-category">💡 General / Viva Tips</div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">What are the limitations of this system?<span class="arrow">›</span></div>
+      <div class="qa-a">Current limitations include: (1) No password authentication — any user can select any account (simplified for local academic use). (2) No Manager role — only two roles instead of three. (3) No email notifications for approvals. (4) No holiday calendar — only weekends are excluded, not public holidays. (5) No leave accrual mechanism — balances are set as a flat annual amount on account approval rather than accruing monthly. (6) No production deployment — runs only on localhost. (7) No mobile-responsive layout for very small screens.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">What would you do differently if you had more time?<span class="arrow">›</span></div>
+      <div class="qa-a">I would add: (1) JWT authentication with bcrypt password hashing for security. (2) A Manager role for multi-level approval. (3) Nodemailer email notifications. (4) Chart.js for interactive charts instead of CSS bars. (5) A holiday calendar feature. (6) Full mobile responsiveness. (7) Unit tests using Jest and Vue Test Utils. (8) Docker containerisation for easier deployment. (9) Monthly leave accrual using a cron job (node-cron package).</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">How do you run this project? What are the prerequisites?<span class="arrow">›</span></div>
+      <div class="qa-a">Prerequisites: (1) Node.js v18+ installed. (2) MongoDB installed and running as a Windows service. To run: double-click start.bat in the project root. This automatically checks if node_modules exists in backend/ and frontend/ and runs npm install if missing, starts MongoDB service, opens two terminal windows (backend on port 5000 and frontend on port 5173), and opens the browser. Alternatively: open two terminals, run <code>node server.js</code> in backend/ and <code>npm run dev</code> in frontend/, then open http://localhost:5173. To reset data, run <code>node seeds/seedData.js</code> from the backend folder.</div>
+    </div>
+
+  </div>
+</div>
+<script>
+function toggle(el) {
+  el.closest('.qa-item').classList.toggle('open');
+}
+</script>
+</body>
+</html>

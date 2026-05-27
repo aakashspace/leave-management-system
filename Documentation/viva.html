@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LMS Docs — Viva Preparation</title>
+<style>
+:root { --primary: #4F46E5; --primary-dark: #3730A3; --primary-light: #EEF2FF; --accent: #06B6D4; --success: #10B981; --warning: #F59E0B; --danger: #EF4444; --text: #1F2937; --text-muted: #6B7280; --bg: #F9FAFB; --card: #FFFFFF; --border: #E5E7EB; --sidebar-w: 270px; --radius: 10px; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; }
+#sidebar { width: var(--sidebar-w); background: #1E1B4B; color: #C7D2FE; position: fixed; top: 0; left: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; z-index: 100; }
+.sb-brand { padding: 24px 20px 16px; border-bottom: 1px solid rgba(255,255,255,.1); }
+.sb-brand h2 { color: #fff; font-size: 16px; font-weight: 700; }
+.sb-brand p { font-size: 11px; color: #A5B4FC; margin-top: 3px; }
+.sb-nav { padding: 12px 0; flex: 1; }
+.sb-section { padding: 6px 20px 2px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #6366F1; font-weight: 700; }
+.sb-nav a { display: flex; align-items: center; gap: 9px; padding: 8px 20px; font-size: 13px; color: #C7D2FE; text-decoration: none; border-left: 3px solid transparent; transition: all .15s; }
+.sb-nav a:hover { background: rgba(255,255,255,.06); color: #fff; border-left-color: #6366F1; }
+.sb-nav a.active { background: rgba(99,102,241,.2); color: #fff; border-left-color: var(--primary); }
+.sb-footer { padding: 14px 20px; font-size: 11px; color: #6366F1; border-top: 1px solid rgba(255,255,255,.08); }
+#main { margin-left: var(--sidebar-w); flex: 1; }
+.page-header { background: linear-gradient(135deg, #1E1B4B 0%, #312E81 50%, #4338CA 100%); color: #fff; padding: 40px 48px 32px; }
+.page-header .breadcrumb { font-size: 12px; color: #A5B4FC; margin-bottom: 12px; }
+.page-header .breadcrumb a { color: #A5B4FC; text-decoration: none; }
+.page-header .breadcrumb a:hover { color: #fff; }
+.page-header h1 { font-size: 28px; font-weight: 800; display: flex; align-items: center; gap: 12px; }
+.page-header p { font-size: 14px; color: #C7D2FE; margin-top: 8px; }
+.content { padding: 40px 48px; max-width: 1100px; }
+.section-divider { height: 3px; background: linear-gradient(90deg, var(--primary) 0%, transparent 60%); border-radius: 99px; margin-bottom: 28px; }
+h3 { font-size: 16px; font-weight: 700; color: var(--text); margin: 24px 0 10px; }
+p { font-size: 14px; line-height: 1.75; color: var(--text); margin-bottom: 12px; }
+code { background: #EEF2FF; color: #4338CA; padding: 2px 7px; border-radius: 5px; font-family: 'Cascadia Code','Fira Code', monospace; font-size: 12px; }
+.qa-item { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 14px; overflow: hidden; }
+.qa-q { padding: 14px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; background: #FAFAFA; font-size: 14px; font-weight: 600; color: var(--text); user-select: none; }
+.qa-q:hover { background: var(--primary-light); }
+.qa-q .arrow { font-size: 18px; color: var(--primary); flex-shrink: 0; transition: transform .2s; }
+.qa-a { padding: 14px 18px; font-size: 13.5px; line-height: 1.75; color: var(--text); background: var(--card); border-top: 1px solid var(--border); display: none; }
+.qa-item.open .qa-a { display: block; }
+.qa-item.open .arrow { transform: rotate(90deg); }
+.qa-category { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin: 28px 0 10px; }
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-track { background: transparent; }
+#sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.15); border-radius: 99px; }
+@media print { #sidebar { display: none; } #main { margin-left: 0; } }
+@media(max-width:768px){ #sidebar{ display:none; } #main{ margin-left:0; } .page-header,.content{ padding:24px 20px; } }
+
+/* Viva-specific styles */
+.difficulty-badge { display: inline-block; border-radius: 99px; padding: 3px 10px; font-size: 11px; font-weight: 700; margin-bottom: 4px; }
+.diff-basic { background: #ECFDF5; color: #065F46; }
+.diff-mid { background: #FFF7ED; color: #92400E; }
+.diff-adv { background: #FEF2F2; color: #991B1B; }
+.level-header { background: linear-gradient(90deg, var(--primary-light), transparent); border-left: 4px solid var(--primary); border-radius: 0 8px 8px 0; padding: 14px 20px; margin: 32px 0 16px; }
+.level-header h2 { font-size: 18px; font-weight: 800; color: var(--primary-dark); margin: 0 0 4px; }
+.level-header p { font-size: 13px; color: var(--text-muted); margin: 0; }
+.level-header.mid { background: linear-gradient(90deg, #FFF7ED, transparent); border-color: #F59E0B; }
+.level-header.mid h2 { color: #92400E; }
+.level-header.adv { background: linear-gradient(90deg, #FEF2F2, transparent); border-color: #EF4444; }
+.level-header.adv h2 { color: #991B1B; }
+.q-count { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 20px; }
+</style>
+</head>
+<body>
+<nav id="sidebar">
+  <div class="sb-brand">
+    <h2>📋 LMS Documentation</h2>
+    <p>IGNOU BCA 6th Sem · BCSP-064</p>
+  </div>
+  <div class="sb-nav">
+    <div class="sb-section">Home</div>
+    <a href="index.html" class="">🏠 Home</a>
+    <div class="sb-section">Overview</div>
+    <a href="overview.html" class="">📌 Project Overview</a>
+    <a href="stack.html" class="">🛠 Technology Stack</a>
+    <a href="architecture.html" class="">🏗 Architecture</a>
+    <div class="sb-section">Design</div>
+    <a href="database.html" class="">🗄 Database Schema</a>
+    <a href="dfd.html" class="">📊 DFD (Level 0–3)</a>
+    <a href="api.html" class="">🔌 API Reference</a>
+    <div class="sb-section">Features</div>
+    <a href="modules.html" class="">📦 Modules</a>
+    <a href="userflow.html" class="">👤 User Flows</a>
+    <a href="testing.html" class="">🧪 Testing</a>
+    <div class="sb-section">Defence</div>
+    <a href="future.html" class="">🔮 Future Scope</a>
+    <a href="defence.html" class="">❓ Defence Q&amp;A</a>
+    <a href="viva.html" class="active">🎓 Viva Prep (45 Q&amp;A)</a>
+  </div>
+  <div class="sb-footer">Aakash Sah · Enroll: 239150627</div>
+</nav>
+
+<div id="main">
+  <div class="page-header">
+    <div class="breadcrumb"><a href="index.html">Home</a> › Viva Preparation</div>
+    <h1>🎓 Viva Preparation — Q&amp;A</h1>
+    <p>Basic to Advanced questions covering all aspects of the LMS project. Click any question to reveal the answer.</p>
+  </div>
+
+  <div class="content">
+    <div class="section-divider"></div>
+
+    <!-- BASIC LEVEL -->
+    <div class="level-header">
+      <h2>🟢 Basic Level — Fundamentals</h2>
+      <p>Core concepts, project overview, and technology basics</p>
+    </div>
+    <p class="q-count">Questions 1–15 &nbsp;·&nbsp; 15 questions</p>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-basic">Basic</span><br>Q1. What is this project about? What problem does it solve?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">The Leave Management System (LMS) is a full-stack web application that automates employee leave management. It replaces manual, paper-based or spreadsheet methods with a centralised digital platform. Employees can register, apply for leave, view their balances and history, and track their status. Admins can approve/reject users, configure leave types, manage departments, and view detailed reports. The system eliminates errors in balance calculation, ensures policy enforcement, and provides real-time visibility into leave data.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-basic">Basic</span><br>Q2. What is the MEVN stack?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">MEVN stands for MongoDB, Express.js, Vue.js, and Node.js. It is a full-stack JavaScript framework combination. MongoDB is the database, Express.js is the backend web framework running on Node.js, and Vue.js is the frontend framework. All four technologies use JavaScript, which means the same language is used throughout the entire application — from database queries to API logic to UI rendering. It is similar to the MEAN stack but uses Vue.js instead of Angular.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-basic">Basic</span><br>Q3. What is MongoDB? What type of database is it?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">MongoDB is a NoSQL document database. Unlike relational databases like MySQL that store data in rows and columns (tables), MongoDB stores data as BSON documents (Binary JSON — similar to JSON objects). Each document can have a flexible structure, and related data can be embedded directly inside a document (like the leave_balances array inside the user document). It is highly scalable and works naturally with JavaScript since the data format matches JSON.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-basic">Basic</span><br>Q4. What is Node.js?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">Node.js is a JavaScript runtime environment built on Google Chrome's V8 JavaScript engine. It allows JavaScript to run on the server side (outside the browser). Node.js uses an event-driven, non-blocking I/O model, which means it can handle many simultaneous requests without creating a new thread for each one — making it fast and efficient. In this project, the entire backend server is built on Node.js.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-basic">Basic</span><br>Q5. What is Express.js?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">Express.js is a minimal and flexible Node.js web application framework. It provides a thin layer of features for building web applications and APIs — such as routing (defining what happens when a URL is hit), middleware (functions that run between a request and response), and error handling. In this project, Express handles all the API endpoints like <code>POST /api/leave-requests</code> or <code>GET /api/users</code>.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-basic">Basic</span><br>Q6. What is Vue.js? How is it different from plain HTML/JavaScript?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">Vue.js is a progressive JavaScript framework for building user interfaces. Unlike plain HTML/JS where you manually update the DOM when data changes, Vue uses a reactive data system — when data changes, the UI automatically updates without you writing DOM manipulation code. It also supports components (reusable building blocks), routing (Vue Router), and state management (Pinia). Vue.js enables building a Single Page Application where the page never fully reloads.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-basic">Basic</span><br>Q7. What is a REST API?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">REST (Representational State Transfer) is an architectural style for building APIs. A RESTful API uses standard HTTP methods: GET (retrieve data), POST (create data), PUT (update data), DELETE (remove data). In this project, the Express.js backend exposes RESTful endpoints. For example, <code>GET /api/users</code> retrieves all users, <code>POST /api/leave-requests</code> creates a new leave application. Each response is a JSON object with the structure: <code>{ success: true/false, data: ..., message: ... }</code>.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-basic">Basic</span><br>Q8. What is JSON?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">JSON stands for JavaScript Object Notation. It is a lightweight, human-readable data format used for storing and transmitting data. In this project, all communication between the Vue.js frontend and the Express.js backend is done via JSON. For example, when an employee submits a leave application, the form data is sent as JSON to the API. The API responds with JSON containing the result. MongoDB also stores data in a JSON-like format called BSON.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-basic">Basic</span><br>Q9. How do you run this project?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">To run the project: (1) Ensure Node.js v18+ and MongoDB are installed. (2) Double-click <code>start.bat</code> in the project root. It automatically checks for node_modules, installs if missing, starts MongoDB service, opens two terminal windows (backend on port 5000, frontend on port 5173), and opens the browser. Alternatively, open two terminals: in <code>backend/</code> run <code>node server.js</code>, in <code>frontend/</code> run <code>npm run dev</code>. Then open http://localhost:5173 in a browser.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-basic">Basic</span><br>Q10. What is package.json and what is its purpose?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">package.json is a configuration file for Node.js projects. It contains: the project name and version, a list of dependencies (packages the project needs, like express, mongoose, cors, vue, axios), devDependencies (tools only needed during development, like nodemon, vite), and scripts (shortcuts for running commands like <code>npm start</code> to start the server or <code>npm run dev</code> to start the Vite dev server). When you run <code>npm install</code>, npm reads package.json and installs all listed packages into node_modules.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-basic">Basic</span><br>Q11. What is npm?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">npm stands for Node Package Manager. It is the default package manager for Node.js. It allows developers to install, update, and manage third-party packages/libraries for their projects. For example, <code>npm install express</code> downloads and installs Express.js. <code>npm run dev</code> executes the "dev" script defined in package.json. All packages are stored in the node_modules folder and tracked in package.json.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-basic">Basic</span><br>Q12. What is the purpose of the .env file?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">The .env file stores environment variables — configuration values that may differ between environments (development, production). In this project, it contains <code>PORT=5000</code> (the port Express runs on) and <code>MONGO_URI=mongodb://localhost:27017/lms_db</code> (the MongoDB connection string). Using .env means these values can be changed without modifying the source code, and sensitive values (like database passwords in production) are kept out of version control by adding .env to .gitignore.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-basic">Basic</span><br>Q13. How many collections does MongoDB have in this project? Name them.</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">The project uses 4 collections in the <code>lms_db</code> database: (1) <strong>users</strong> — stores employee and admin accounts with embedded leave balances. (2) <strong>departments</strong> — stores department names like Engineering, HR, Marketing, Finance. (3) <strong>leave_types</strong> — stores leave type configurations like Sick Leave (10 days), Annual Leave (15 days), etc. (4) <strong>leave_requests</strong> — stores all leave applications with status, dates, priority, and admin comments.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-basic">Basic</span><br>Q14. How many roles are there in the system? What can each role do?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">There are two roles: <strong>Employee</strong> and <strong>Admin</strong>. Employees can register (pending approval), apply for leave, view their leave balance dashboard, see leave history, cancel pending leaves, view an interactive calendar, and edit their profile. Admins can approve/reject user registrations, create and manage leave types (add, edit, deactivate), manage departments, approve or reject leave requests with comments, and view reports broken down by type, department, and employee.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-basic">Basic</span><br>Q15. What is a Single Page Application (SPA)?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">A Single Page Application is a web app that loads a single HTML page and dynamically updates the content using JavaScript without full page reloads. When you navigate from Dashboard to Apply Leave, the browser does NOT load a new HTML file from the server — Vue Router intercepts the click, renders the correct Vue component, and only fetches the needed data (JSON) from the API. This makes the app feel fast and smooth, like a desktop application. The trade-off is that initial load may be slightly slower since the entire JavaScript bundle is downloaded once.</div>
+    </div>
+
+    <!-- INTERMEDIATE LEVEL -->
+    <div class="level-header mid">
+      <h2>🟡 Intermediate Level — Features &amp; Design</h2>
+      <p>Workflows, architecture decisions, and feature implementation details</p>
+    </div>
+    <p class="q-count">Questions 16–30 &nbsp;·&nbsp; 15 questions</p>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-mid">Intermediate</span><br>Q16. Explain the user registration and approval workflow step by step.</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">Step 1: Employee opens the app at localhost:5173 and clicks the "Register" tab. Step 2: They fill in their name, email, and optionally select a department and click Register. Step 3: The frontend sends <code>POST /api/users</code> with <code>role='employee'</code>. Step 4: The backend checks if the email already exists. If not, it creates a user document with <code>status='pending'</code> in MongoDB. Step 5: The employee sees a success message saying "Account pending admin approval." Step 6: The admin logs in, goes to Manage Users or the Dashboard, and sees the pending user in a list. Step 7: Admin clicks Approve — the backend sets <code>status='approved'</code> AND automatically reads all active leave types and creates a leave_balances array inside the user document. Step 8: The user now appears in the Select User dropdown and can log in.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-mid">Intermediate</span><br>Q17. How is leave balance deducted when a leave is approved?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">When the admin approves a paid leave request, the backend uses MongoDB's <code>$inc</code> operator to atomically update the user's leave_balances array. Specifically, it finds the embedded sub-document where <code>leave_type_id</code> matches the request's <code>type_id</code> and performs: <code>used_days += total_days</code> and <code>remaining_days -= total_days</code>. This is a single atomic database operation, meaning it cannot be partially applied. The <code>$inc</code> operator is critical here because it prevents race conditions — if two leaves were approved simultaneously, simple read-modify-write would give wrong results, but <code>$inc</code> is atomic. Unpaid leaves skip this step entirely since they don't consume paid balance.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-mid">Intermediate</span><br>Q18. How is leave priority automatically assigned?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">Priority is assigned server-side in the <code>leaveRequestController.js</code> <code>getPriority()</code> function. It checks the leave type name (lowercased) against keywords: if it includes 'sick', 'medical', or 'emergency' → priority = 'high'. If it includes 'casual' → priority = 'medium'. All others (like Annual Leave) → priority = 'low'. This logic runs on the backend so employees cannot manipulate their own priority by changing the request. On the Admin dashboard, pending requests are sorted: high → medium → low, ensuring urgent leaves like Sick Leave or Emergency Leave are reviewed first.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-mid">Intermediate</span><br>Q19. How are working days calculated? Why exclude weekends?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">The <code>countWeekdays()</code> function in <code>leaveRequestController.js</code> iterates through every calendar day from start_date to end_date. For each date, it calls JavaScript's <code>getDay()</code> method — which returns 0 for Sunday and 6 for Saturday. If the day is not Sunday or Saturday (i.e., it's Monday–Friday), the counter increments. Weekends are excluded because employees don't work on weekends, so a leave from Friday to Monday = 2 working days, not 4 calendar days. If the entire selected range falls on a weekend (e.g., Saturday–Sunday), the backend returns a 400 error: "No working days in selected range." The same calculation runs in the frontend for live preview as the user picks dates.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-mid">Intermediate</span><br>Q20. What is Pinia? Why is state management needed in Vue?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">Pinia is the official state management library for Vue 3. State management is needed because in a multi-page SPA, some data needs to be shared across all components — in this case, the currently logged-in user's data (name, _id, role, leave_balances). Without Pinia, when the user navigates from Dashboard to Apply Leave, the user's data would be lost because each component is independent. Pinia provides a centralised store that any component in the app can read from. The store also persists the user data to localStorage, so if the browser is refreshed, the user session is restored from storage instead of asking the user to log in again.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-mid">Intermediate</span><br>Q21. What is Vue Router? How does it work?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">Vue Router is the official client-side routing library for Vue 3. It maps URL paths to Vue components. In this project, routes are defined in <code>router/index.js</code> — for example, <code>/employee/dashboard</code> maps to the <code>Dashboard.vue</code> component. When a user clicks a navigation link, Vue Router intercepts the event, updates the browser's URL using the History API, and renders the matching component inside the <code>&lt;router-view /&gt;</code> placeholder — all without a full page reload. Routes are lazy-loaded using dynamic <code>import()</code> — the code for each view is only downloaded when that route is first visited, improving initial load performance.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-mid">Intermediate</span><br>Q22. What is Axios and why use it instead of the built-in fetch API?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">Axios is a promise-based HTTP client for JavaScript. In this project, a shared Axios instance is created in <code>api/axios.js</code> with the base URL set to <code>'/api'</code>. All API calls use this instance. Axios is preferred over the native fetch API because: (1) it automatically parses JSON responses (no need for <code>.json()</code> call), (2) it provides better error handling (non-2xx status codes throw errors automatically), (3) the shared instance with a base URL means every component just calls <code>api.get('/users')</code> instead of the full URL, and (4) interceptors can be added later (e.g., for authentication tokens) without changing every call.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-mid">Intermediate</span><br>Q23. What is Vite? What is the proxy configuration and why is it needed?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">Vite is an ultra-fast frontend build tool and development server. It provides instant Hot Module Replacement (HMR) — when you save a Vue file, the browser updates without a full reload, preserving state. The proxy in <code>vite.config.js</code> is configured so that any request from the frontend to <code>/api</code> is forwarded to <code>http://localhost:5000</code>. This is needed because the frontend runs on port 5173 and the backend on port 5000. Browsers block cross-origin requests (CORS policy). The Vite proxy makes the frontend and backend appear to be on the same origin during development. In production, a reverse proxy (like Nginx) would serve the same purpose.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-mid">Intermediate</span><br>Q24. What is CORS and why did you enable it on the backend?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">CORS (Cross-Origin Resource Sharing) is a browser security mechanism that blocks web pages from making HTTP requests to a different domain/port than the one that served the page. Since the Vue frontend (port 5173) makes requests to the Express backend (port 5000), they are on different ports — which counts as different origins. Without CORS enabled, the browser would block all API calls. In the backend <code>server.js</code>, the cors npm package is added as middleware: <code>app.use(cors())</code>. During development, this is acceptable. In production, CORS should be restricted to specific allowed origins for security.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-mid">Intermediate</span><br>Q25. What is Mongoose? Explain its key features.</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">Mongoose is an ODM (Object Document Mapper) for MongoDB and Node.js. Key features: (1) <strong>Schema definition</strong> — you define the structure of documents upfront (field names, types, required fields, enums). For example, the User schema enforces that role must be 'employee' or 'admin'. (2) <strong>Validation</strong> — Mongoose validates data before saving, preventing invalid data from reaching the database. (3) <strong>Middleware</strong> — you can add pre/post hooks (e.g., hash a password before saving). (4) <strong>populate()</strong> — allows referencing documents in other collections and auto-joining them, similar to SQL JOINs. (5) <strong>Query API</strong> — a chainable, expressive API for building MongoDB queries.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-mid">Intermediate</span><br>Q26. What is soft delete? Why is it used for leave types?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">Soft delete means marking a record as inactive (<code>is_active = false</code>) instead of permanently removing it from the database. For leave types, a hard delete would cause problems because existing leave_requests reference the leave type's name and ID. Deleting the leave type would leave orphaned references. With soft delete: deactivated leave types are hidden from the "Apply Leave" dropdown (only active types are shown to employees), but all historical leave requests that referenced that type remain intact and queryable. Admins can also reactivate a type if needed. This preserves historical data integrity.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-mid">Intermediate</span><br>Q27. What happens when a user selects their account on the home screen?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">On the <code>SelectUser.vue</code> page, the app calls <code>GET /api/users?status=approved</code> to fetch all approved users. The user picks their name from a dropdown. When they click "Continue", the selected user object (including name, _id, role, dept_id, leave_balances) is saved to the Pinia store using <code>store.setUser()</code>. The store also persists this to localStorage. Vue Router then redirects based on role: if <code>role='admin'</code> → <code>/admin/dashboard</code>, if <code>role='employee'</code> → <code>/employee/dashboard</code>. All subsequent pages read the current user from the Pinia store.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-mid">Intermediate</span><br>Q28. How does the leave calendar work?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">The <code>LeaveCalendar.vue</code> page fetches the current user's approved leave requests from <code>GET /api/leave-requests/my/:user_id</code>. It then builds a monthly calendar grid (7 columns for Mon–Sun). For each day in the month, it checks if any approved leave request covers that date. If yes, it renders a colored dot using the leave type's <code>color_code</code>. Users can navigate between months using Previous/Next buttons. Below the calendar grid, a list of approved leaves for the current month is shown with dates and type names. This gives employees a visual overview of their approved leave.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-mid">Intermediate</span><br>Q29. What is denormalization? Where is it used in this project?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">Denormalization means storing redundant copies of data to improve read performance, at the cost of some write complexity. In this project, two fields are denormalized: (1) <code>leave_type_name</code> is stored directly in every leave_request document, even though it could be looked up via <code>type_id</code>. This means displaying leave history doesn't require a JOIN with the leave_types collection. (2) <code>leave_balances</code> is embedded inside the user document rather than in a separate collection. This allows fetching a user and their complete balance in a single query. The trade-off is that if a leave type's name changes, existing request records won't auto-update — but for this system, that's acceptable.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-mid">Intermediate</span><br>Q30. What is the purpose of the seeds/seedData.js file?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">The seed file is used to populate the database with initial test data. It first clears all existing data (deletes all users, departments, leave_types, and leave_requests), then inserts: 4 departments (Engineering, Marketing, HR, Finance), 5 leave types (Annual 15 days, Sick 10 days, Casual 7 days, Maternity 90 days, Emergency 3 days), and 5 test users (1 admin with <code>status=approved</code>, 3 employees with approved status and pre-filled leave balances, 1 pending employee). It is run with <code>node seeds/seedData.js</code> from the backend folder. This makes it easy to reset the database to a clean state for testing or demonstration.</div>
+    </div>
+
+    <!-- ADVANCED LEVEL -->
+    <div class="level-header adv">
+      <h2>🔴 Advanced Level — Technical Deep Dive</h2>
+      <p>Internals, algorithms, trade-offs, and production readiness</p>
+    </div>
+    <p class="q-count">Questions 31–45 &nbsp;·&nbsp; 15 questions</p>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-adv">Advanced</span><br>Q31. Explain the MongoDB Aggregation Pipeline used for department stats.</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">The department stats use a 6-stage aggregation pipeline: <strong>Stage 1:</strong> Start with the leave_requests collection. <strong>Stage 2:</strong> <code>$lookup</code> with users collection (join on user_id = _id) — attaches user data to each request. <strong>Stage 3:</strong> <code>$unwind</code> the users array — flattens it so each document has exactly one user object. <strong>Stage 4:</strong> <code>$lookup</code> with departments collection (join on user.dept_id = _id) — attaches department data. <strong>Stage 5:</strong> <code>$unwind</code> with <code>preserveNullAndEmptyArrays: true</code> — this is critical: it keeps requests from users with no department assigned (they go into a 'No Department' group) instead of being dropped. <strong>Stage 6:</strong> <code>$group</code> by department name using <code>$ifNull</code> to handle nulls, computing sum of totalRequests, totalDays, and conditional counts for approved/pending/rejected using <code>$cond</code>. <strong>Stage 7:</strong> <code>$sort</code> by totalRequests descending. The result is an array like <code>[{ _id: "Engineering", totalRequests: 5, totalDays: 12, approved: 3, pending: 1, rejected: 1 }]</code>.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-adv">Advanced</span><br>Q32. What is a race condition? How does MongoDB's $inc prevent it?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">A race condition occurs when two operations happen simultaneously and both depend on reading the same value before writing. Example without <code>$inc</code>: Request A reads user's remaining_days = 10. Request B also reads remaining_days = 10. Request A calculates 10 - 3 = 7 and writes 7. Request B calculates 10 - 5 = 5 and writes 5. Final result: 5, but should be 2 (10 - 3 - 5). With MongoDB's <code>$inc</code>: the operation <code>remaining_days: -3</code> is a single atomic increment instruction sent to MongoDB. MongoDB applies it at the database level in one operation. Even if two requests arrive simultaneously, MongoDB queues the <code>$inc</code> operations. Each one reads the current value and applies the increment atomically. The result is always correct.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-adv">Advanced</span><br>Q33. What is the Composition API in Vue 3? How is it different from the Options API?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">The Composition API is a set of APIs in Vue 3 that allows organizing component logic by feature rather than by option type. The traditional Options API organizes code into sections: <code>data()</code>, <code>methods()</code>, <code>computed()</code>, <code>mounted()</code>, etc. In a large component, related code for one feature gets split across multiple sections. The Composition API uses <code>&lt;script setup&gt;</code> syntax (used throughout this project) with functions like <code>ref()</code>, <code>computed()</code>, <code>onMounted()</code> directly in the setup context. All variables and functions related to one feature can be grouped together. Benefits: better code organization, easier reuse via composables, full TypeScript support, and slightly better performance due to smaller component instance.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-adv">Advanced</span><br>Q34. Explain the $lookup stage in MongoDB. How is it similar to SQL JOIN?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a"><code>$lookup</code> is a MongoDB aggregation stage that performs a left outer join with another collection. Syntax: <code>{ $from: 'target_collection', $localField: 'field_in_current', $foreignField: 'field_in_target', $as: 'result_array_name' }</code>. It is similar to SQL's LEFT JOIN — for each document, it finds all matching documents in the target collection and attaches them as an array. In this project, <code>$lookup</code> joins leave_requests with users (matching user_id to _id) and then users with departments (matching dept_id to _id). The key difference from SQL JOIN: MongoDB <code>$lookup</code> results in an embedded array, so a <code>$unwind</code> stage is needed to flatten it back to one document per result. Also, <code>$lookup</code> works on denormalized data without foreign key constraints.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-adv">Advanced</span><br>Q35. What is the difference between ref() and reactive() in Vue 3?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">Both are reactivity APIs in Vue 3. <code>ref()</code> wraps a primitive value (string, number, boolean) or object in a reactive reference object. You access the value via <code>.value</code> in JavaScript (e.g., <code>count.value++</code>) but Vue templates automatically unwrap it (just use <code>{{ count }}</code>). <code>reactive()</code> wraps a plain object and makes all its properties reactive. You access properties directly without <code>.value</code>. In this project, <code>ref()</code> is used for most state (e.g., <code>const users = ref([])</code>, <code>const loading = ref(false)</code>) because it works with both primitives and objects. <code>reactive()</code> is typically used when you have a group of related values that belong together.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-adv">Advanced</span><br>Q36. How does Vite's Hot Module Replacement (HMR) work?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">HMR allows Vite to update modules in the browser without a full page reload. When you save a <code>.vue</code> file, Vite's dev server: (1) detects the file change via the file system watcher. (2) Compiles only the changed module. (3) Sends the updated module to the browser over a WebSocket connection. (4) The browser replaces only the changed component in the running app, preserving the current state (e.g., if you were on the Apply Leave page, you stay there with your form data intact). This dramatically speeds up development compared to the traditional save → full reload cycle.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-adv">Advanced</span><br>Q37. What is lazy loading in Vue Router and why is it important?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">Lazy loading means the JavaScript code for a route's component is only downloaded when that route is first visited, instead of bundling everything into one large file that must load before the app starts. In this project, all routes use dynamic imports: <code>component: () =&gt; import('../views/employee/Dashboard.vue')</code>. The parentheses with <code>() =&gt;</code> make this a function that returns a promise — Vite treats this as a code-split point and creates a separate chunk. Benefits: the initial bundle (first load) is smaller and loads faster. If an admin never visits employee routes, that code is never downloaded. Vite handles the bundling automatically.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-adv">Advanced</span><br>Q38. What is the event loop in Node.js? Why is Node.js non-blocking?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">The event loop is the core mechanism that allows Node.js to perform non-blocking I/O despite JavaScript being single-threaded. When Node.js encounters an I/O operation (like a MongoDB query), instead of blocking the thread and waiting for the result, it registers a callback and moves on to handle the next request. When the I/O operation completes, the event loop picks up the callback and executes it. This is why Node.js can handle thousands of concurrent API requests efficiently — it never sits idle waiting for I/O. In this project, all database operations (Mongoose queries) are async/await — they are non-blocking under the hood.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-adv">Advanced</span><br>Q39. What is async/await? How does it work?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">async/await is syntactic sugar over JavaScript Promises that makes asynchronous code look and behave like synchronous code. An <code>async</code> function always returns a Promise. The <code>await</code> keyword pauses execution inside the function until the Promise resolves, then returns the result. In this project, all controller functions are async — e.g., <code>const user = await User.findById(id)</code> waits for the MongoDB query to complete before continuing. Error handling is done with <code>try/catch</code> blocks. Without async/await, the same code would use <code>.then().catch()</code> chains, which are harder to read and maintain. The underlying async nature (non-blocking event loop) is unchanged.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-adv">Advanced</span><br>Q40. Why are leave_balances embedded in the user document rather than a separate collection? What are the trade-offs?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">leave_balances are embedded for three reasons: (1) <strong>Access pattern</strong> — they are always read together with the user (the Dashboard shows all balances). Embedding avoids a separate query. (2) <strong>Atomic update</strong> — the <code>$inc</code> operation to deduct balance targets one document. With a separate collection, a multi-document update would need a transaction. (3) <strong>Bounded size</strong> — the number of leave types is small and bounded. Trade-offs of embedding: if a leave type's max_paid_days changes, all user documents need to be updated individually (no cascade). Also, if there were hundreds of leave types, embedding would bloat user documents. A separate collection would be better in that case. This design decision prioritises read performance and atomic updates over update simplicity.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-adv">Advanced</span><br>Q41. What are HTTP status codes? Which ones does this project use?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">HTTP status codes indicate the result of an HTTP request. This project uses: <strong>200 OK</strong> — successful GET/PUT requests. <strong>201 Created</strong> — successful POST (new resource created, e.g., new user or leave request). <strong>400 Bad Request</strong> — client-side validation error (e.g., insufficient leave balance, duplicate email, no working days in range). <strong>404 Not Found</strong> — requested resource doesn't exist (e.g., user ID not found). <strong>500 Internal Server Error</strong> — unexpected server error (database connection issue, etc.). Using correct status codes is important because frontend code can check the status code to decide how to handle the response — showing a success message for 201, an error alert for 400, etc.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-adv">Advanced</span><br>Q42. What is middleware in Express.js? Name the middleware used in this project.</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">Middleware is a function that has access to the request (<code>req</code>), response (<code>res</code>), and the next middleware function (<code>next</code>). Middleware runs between the request arriving and the route handler executing. In this project: (1) <code>cors()</code> — handles Cross-Origin Resource Sharing headers. (2) <code>express.json()</code> — parses incoming JSON request bodies so controller functions can access <code>req.body</code>. (3) <strong>Error-handling middleware</strong> — defined at the end of <code>server.js</code> with 4 parameters (<code>err, req, res, next</code>), catches any errors thrown in route handlers and returns a 500 response. Middleware runs in order — if <code>cors()</code> or <code>express.json()</code> isn't added before routes, the routes won't work correctly.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-adv">Advanced</span><br>Q43. What is the difference between findById(), findOne(), find(), and findByIdAndUpdate() in Mongoose?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a"><code>find()</code> — returns an array of all documents matching a filter. Used in getAllUsers, getAllLeaves. <code>findOne()</code> — returns the first document matching a filter. Used in createUser to check if email exists. <code>findById(id)</code> — shorthand for <code>findOne({ _id: id })</code>. Used to fetch a specific user or leave request before updating. <code>findByIdAndUpdate(id, update, { new: true })</code> — finds a document by ID, applies the update, and with <code>{ new: true }</code> returns the updated document (without <code>{ new: true }</code> it returns the original). Used in rejectUser and updateUser. The difference matters because <code>findByIdAndUpdate</code> runs a single DB operation while <code>findById</code> + <code>save</code> runs two.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-adv">Advanced</span><br>Q44. What is the $cond operator in MongoDB? How is it used in the aggregation pipeline?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a"><code>$cond</code> is MongoDB's conditional operator, similar to a ternary expression: <code>{ $cond: [condition, value_if_true, value_if_false] }</code>. In the department stats aggregation, it counts approved/pending/rejected requests within the <code>$group</code> stage without multiple queries: <code>approved: { $sum: { $cond: [{ $eq: ['$status', 'approved'] }, 1, 0] } }</code> — for each document, if status equals 'approved', add 1, otherwise add 0. This effectively counts approved requests per group in a single pass through the data. Without <code>$cond</code>, you'd need three separate aggregation queries (one for each status), which would be three times slower.</div>
+    </div>
+
+    <div class="qa-item">
+      <div class="qa-q" onclick="toggle(this)">
+        <span><span class="difficulty-badge diff-adv">Advanced</span><br>Q45. What improvements would you make to this project to make it production-ready?</span>
+        <span class="arrow">›</span>
+      </div>
+      <div class="qa-a">Several improvements are needed for production: (1) <strong>Authentication</strong> — add bcrypt password hashing and JWT (JSON Web Tokens) for secure login. Currently any user can select any account. (2) <strong>Authorization middleware</strong> — verify JWT on protected routes instead of trusting the frontend. (3) <strong>Input sanitization</strong> — sanitize all inputs to prevent NoSQL injection. (4) <strong>Rate limiting</strong> — use express-rate-limit to prevent API abuse. (5) <strong>HTTPS</strong> — deploy with SSL/TLS certificates. (6) <strong>Restrict CORS</strong> — allow only specific trusted origins, not all. (7) <strong>Environment-specific configs</strong> — separate dev/prod MongoDB URIs. (8) <strong>Logging</strong> — use Winston or Morgan for structured logging. (9) <strong>Docker</strong> — containerize both backend and frontend for consistent deployment. (10) <strong>CI/CD</strong> — automated testing and deployment pipeline.</div>
+    </div>
+
+  </div>
+</div>
+<script>
+function toggle(el) {
+  el.closest('.qa-item').classList.toggle('open');
+}
+</script>
+</body>
+</html>
