@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const LeaveType = require('../models/LeaveType');
 
@@ -24,11 +25,25 @@ exports.getPendingUsers = async (req, res) => {
 
 exports.createUser = async (req, res) => {
   try {
-    const { name, email, role, dept_id } = req.body;
+    const { name, email, password, role, dept_id } = req.body;
     const exists = await User.findOne({ email });
     if (exists) return res.status(400).json({ success: false, message: 'Email already exists' });
-    const user = new User({ name, email, role: role || 'employee', ...(dept_id ? { dept_id } : {}), status: role === 'admin' ? 'approved' : 'pending' });
-    if (role === 'admin') {
+
+    const assignedRole = role || 'employee';
+    const user = new User({
+      name,
+      email,
+      role: assignedRole,
+      ...(dept_id ? { dept_id } : {}),
+      status: assignedRole === 'admin' ? 'approved' : 'pending'
+    });
+
+    // Hash password if provided
+    if (password) {
+      user.password_hash = await bcrypt.hash(password, 10);
+    }
+
+    if (assignedRole === 'admin') {
       const leaveTypes = await LeaveType.find({ is_active: true });
       user.leave_balances = leaveTypes.map(lt => ({
         leave_type_id: lt._id,
@@ -39,7 +54,7 @@ exports.createUser = async (req, res) => {
       }));
     }
     await user.save();
-    res.status(201).json({ success: true, data: user, message: role === 'admin' ? 'Admin created' : 'User registered, pending approval' });
+    res.status(201).json({ success: true, data: user, message: assignedRole === 'admin' ? 'Admin created' : 'Registration successful. Pending admin approval.' });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }

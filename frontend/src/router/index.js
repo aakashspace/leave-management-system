@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
-  { path: '/', component: () => import('../views/SelectUser.vue') },
+  { path: '/', redirect: '/login' },
+  { path: '/login', component: () => import('../views/Login.vue') },
   {
     path: '/employee',
     component: () => import('../layouts/EmployeeLayout.vue'),
@@ -25,6 +26,7 @@ const routes = [
       { path: 'leaves', component: () => import('../views/admin/AllLeaves.vue') },
       { path: 'departments', component: () => import('../views/admin/Departments.vue') },
       { path: 'reports', component: () => import('../views/admin/Reports.vue') },
+      { path: 'calendar', component: () => import('../views/admin/TeamCalendar.vue') },
     ]
   }
 ];
@@ -35,7 +37,19 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.path === '/') return next();
+  const token = localStorage.getItem('lms_token');
+  const user = JSON.parse(localStorage.getItem('lms_user') || 'null');
+
+  // Allow login page always
+  if (to.path === '/login') return next();
+
+  // Not logged in → redirect to login
+  if (!token || !user) return next('/login');
+
+  // Role-based access
+  if (to.path.startsWith('/admin') && user.role !== 'admin') return next('/login');
+  if (to.path.startsWith('/employee') && user.role !== 'employee') return next('/login');
+
   next();
 });
 

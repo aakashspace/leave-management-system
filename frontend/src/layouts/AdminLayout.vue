@@ -42,6 +42,11 @@
           Leave Types
         </router-link>
 
+        <router-link to="/admin/calendar" class="nav-item" :class="{ active: isActive('/admin/calendar') }">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>
+          Team Calendar
+        </router-link>
+
         <div class="nav-section-label">Administration</div>
         <router-link to="/admin/users" class="nav-item" :class="{ active: isActive('/admin/users') }">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
@@ -58,11 +63,11 @@
       </nav>
 
       <div class="sidebar-footer">
-        <button class="btn btn-ghost btn-full" @click="switchUser" style="color: #C7D2FE; border-color: rgba(255,255,255,0.15);">
+        <button class="btn btn-ghost btn-full" @click="logout" style="color: #C7D2FE; border-color: rgba(255,255,255,0.15);">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
             <path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
           </svg>
-          Switch User
+          Logout
         </button>
       </div>
     </aside>
@@ -105,9 +110,9 @@ function isActive(path) {
   return route.path === path || route.path.startsWith(path + '/');
 }
 
-function switchUser() {
-  store.clearUser();
-  router.push('/');
+function logout() {
+  store.clearAuth();
+  router.push('/login');
 }
 </script>
 

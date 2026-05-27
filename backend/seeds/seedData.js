@@ -1,5 +1,6 @@
 require('dotenv').config({ path: '../.env' });
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 const Department = require('../models/Department');
 const LeaveType = require('../models/LeaveType');
 const User = require('../models/User');
@@ -35,17 +36,66 @@ async function seed() {
     remaining_days: lt.max_paid_days
   }));
 
+  // Hash default password for all seeded users
+  const defaultPassword = await bcrypt.hash('Password@123', 10);
+  const adminPassword = await bcrypt.hash('Admin@123', 10);
+
   await User.insertMany([
-    { name: 'System Admin', email: 'admin@lms.com', role: 'admin', status: 'approved', dept_id: depts[2]._id, leave_balances: balances },
-    { name: 'Alice Johnson', email: 'alice@lms.com', role: 'employee', status: 'approved', dept_id: depts[0]._id, leave_balances: balances },
-    { name: 'Bob Smith', email: 'bob@lms.com', role: 'employee', status: 'approved', dept_id: depts[1]._id, leave_balances: balances },
-    { name: 'Carol White', email: 'carol@lms.com', role: 'employee', status: 'approved', dept_id: depts[2]._id, leave_balances: balances },
-    { name: 'David Lee', email: 'david@lms.com', role: 'employee', status: 'pending', dept_id: depts[3]._id, leave_balances: [] }
+    {
+      name: 'System Admin',
+      email: 'admin@lms.com',
+      password_hash: adminPassword,
+      role: 'admin',
+      status: 'approved',
+      dept_id: depts[2]._id,
+      leave_balances: balances
+    },
+    {
+      name: 'Alice Johnson',
+      email: 'alice@lms.com',
+      password_hash: defaultPassword,
+      role: 'employee',
+      status: 'approved',
+      dept_id: depts[0]._id,
+      leave_balances: balances
+    },
+    {
+      name: 'Bob Smith',
+      email: 'bob@lms.com',
+      password_hash: defaultPassword,
+      role: 'employee',
+      status: 'approved',
+      dept_id: depts[1]._id,
+      leave_balances: balances
+    },
+    {
+      name: 'Carol White',
+      email: 'carol@lms.com',
+      password_hash: defaultPassword,
+      role: 'employee',
+      status: 'approved',
+      dept_id: depts[2]._id,
+      leave_balances: balances
+    },
+    {
+      name: 'David Lee',
+      email: 'david@lms.com',
+      password_hash: defaultPassword,
+      role: 'employee',
+      status: 'pending',
+      dept_id: depts[3]._id,
+      leave_balances: []
+    }
   ]);
 
   console.log('Seed data inserted successfully!');
-  console.log('Admin: admin@lms.com');
-  console.log('Employees: alice, bob, carol, david');
+  console.log('');
+  console.log('Login credentials:');
+  console.log('  Admin   → admin@lms.com  / Admin@123');
+  console.log('  Alice   → alice@lms.com  / Password@123');
+  console.log('  Bob     → bob@lms.com    / Password@123');
+  console.log('  Carol   → carol@lms.com  / Password@123');
+  console.log('  David   → david@lms.com  / Password@123 (pending - cannot login yet)');
   await mongoose.disconnect();
 }
 

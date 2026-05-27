@@ -2,17 +2,26 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useAppStore = defineStore('app', () => {
+  const token = ref(localStorage.getItem('lms_token') || null);
   const currentUser = ref(JSON.parse(localStorage.getItem('lms_user') || 'null'));
 
-  function setUser(user) {
+  function setAuth(user, tkn) {
+    token.value = tkn;
     currentUser.value = user;
+    localStorage.setItem('lms_token', tkn);
     localStorage.setItem('lms_user', JSON.stringify(user));
   }
 
-  function clearUser() {
+  function clearAuth() {
+    token.value = null;
     currentUser.value = null;
+    localStorage.removeItem('lms_token');
     localStorage.removeItem('lms_user');
   }
 
-  return { currentUser, setUser, clearUser };
+  // Legacy aliases (kept for backward compatibility)
+  function setUser(user) { setAuth(user, token.value); }
+  function clearUser() { clearAuth(); }
+
+  return { token, currentUser, setAuth, clearAuth, setUser, clearUser };
 });

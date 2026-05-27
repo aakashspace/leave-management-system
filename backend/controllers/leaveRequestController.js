@@ -73,7 +73,7 @@ exports.getAllLeaves = async (req, res) => {
     if (req.query.user_id) filter.user_id = req.query.user_id;
     const priorityOrder = { high: 0, medium: 1, low: 2 };
     const leaves = await LeaveRequest.find(filter)
-      .populate('user_id', 'name email dept_id')
+      .populate({ path: 'user_id', select: 'name email dept_id', populate: { path: 'dept_id', select: 'dept_name' } })
       .populate('type_id', 'name color_code')
       .sort({ createdAt: -1 });
     leaves.sort((a, b) => (priorityOrder[a.priority] || 1) - (priorityOrder[b.priority] || 1));

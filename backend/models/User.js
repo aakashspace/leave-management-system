@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
+  password_hash: { type: String, default: null },
   role: { type: String, enum: ['employee', 'admin'], default: 'employee' },
   status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' },
   dept_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Department' },
